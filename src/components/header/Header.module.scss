@@ -1,0 +1,114 @@
+.header{
+    background: #3C4619;
+    height: 100px;
+}
+.nav{
+    display: flex;
+    justify-content: end; /* центрирование по горизонтали */
+    .menu{
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        &_btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 18.96px; /* 150.476% */
+            letter-spacing: 0.15px;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.logoBox{
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    width: 100px;
+    img{
+        width: 100%;
+    }
+}
+.searchBox {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 40px;
+    transition: 0.4s;
+
+    &.active{
+        border: 1px solid white;
+        transition: 0.4s;
+        .searchInput {
+            width: 240px;
+            padding: 0 20px;
+            &::-webkit-input-placeholder {
+                color: rgba(255, 255, 255, 0.74);
+                transition: 0.3s;
+            }
+        }
+    }
+    &.active{
+        .searchButton {
+            color : white;
+            svg{
+                transform: translateX(-240px);
+                transition: 0.4s;
+            }
+        }
+    }
+
+    .searchButton {
+        float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        transition: 0.4s;
+
+        & svg {
+            font-size: 20px;
+            font-weight: bolder;
+            transform: translateX(0px);
+            transition: 0.4s;
+
+        }
+
+    }
+
+    .searchInput {
+        background: none;
+        outline:none;
+        float:left;
+        padding: 0;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 18.96px;
+        letter-spacing: 0.15px;
+        color: #FFFFFF;
+        transition: 0.4s;
+        width: 0;
+        &::-webkit-input-placeholder {
+            color: rgba(255, 255, 255, 0);
+            transition: 0.3s;
+        }
+    }
+}
+
+
+
+
