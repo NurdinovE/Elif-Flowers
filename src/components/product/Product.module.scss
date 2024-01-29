@@ -1,0 +1,126 @@
+#Products{
+  margin: 100px 0 50px;
+  @media (max-width: 600px) {
+    margin: 50px 0;
+  }
+}
+
+.filters {
+  margin-top: 20px;
+  display: flex;
+  gap: 30px;
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+  }
+
+
+  .filter {
+    overflow: hidden;
+
+    .dropdown {
+      border-radius: 3px;
+      background-color: white;
+
+      &_header {
+        padding: 15px;
+        cursor: pointer;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #E5E8EC;
+        width: 200px;
+
+        .icon {
+          width: 9px;
+          height: 13px;
+          font-size: 13px;
+          color: #91A5BE;
+          transform: rotate(270deg);
+          transition: all .2s ease-in-out;
+        }
+
+        .icon.open {
+          transform: rotate(90deg);
+        }
+      }
+
+      &_body {
+        position: absolute;
+        background: #FFFFFF;
+        opacity: 0;
+        z-index: 10;
+        visibility: hidden;
+        transform: translateY(-40px);
+        transition: 0.3s;
+        width: 200px;
+
+      }
+
+      &_body.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: 0.4s;
+      }
+
+      &_item {
+        padding: 10px;
+        border: 1px solid #E5E8EC;
+
+      }
+
+      &_item:hover {
+        cursor: pointer;
+      }
+
+      &_item_dot {
+        opacity: 0;
+        color: #91A5BE;
+        transition: all .2s ease-in-out;
+      }
+
+      &_item_dot.selected {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.products {
+  display: grid;
+  grid-template-columns: 350px 350px 350px;
+  justify-content: space-between;
+  @media (max-width: 1200px) {
+    grid-template-columns: 300px 300px 300px;
+  }
+  @media (max-width: 1024px) {
+    justify-content: space-between;
+    grid-template-columns: 350px 350px;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    grid-template-columns: 400px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+.product_title {
+  color: #1E280F;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.product_descr {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.33px;
+  letter-spacing: 0.15px;
+}
+

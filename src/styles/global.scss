@@ -7,15 +7,15 @@ body{
 }
 
 .container{
-    max-width: 1440px;
+    max-width: 1400px;
     padding: 0 20px;
     margin: 0 auto;
 }
 
-.footer__container{
-    max-width: 1180px;
-    padding: 0 20px;
-    margin: 0 auto;
+@media (max-width: 1400px) {
+    .container{
+        max-width: 1200px;
+    }
 }
 
 @media (max-width: 1200px) {

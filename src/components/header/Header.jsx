@@ -13,9 +13,8 @@ const Header = () => {
 
     useEffect(() => {
         let handler = (e)=>{
-            if(!menuRef.current.contains(e.target)){
+            if(!menuRef.current?.contains(e.target)){
                 setOpen(false);
-                console.log(menuRef.current);
             }
         };
 
@@ -30,43 +29,49 @@ const Header = () => {
 
 
     return (
-        <header className={cls.header}>
-            <div className="container"  ref={menuRef}>
-                <nav className={cls.nav}>
-                    <div className={cls.logoBox}>
-                        <img src={logo} alt="logotype"/>
-                    </div>
-                    <div className={cls.menu}>
-                        <div className={isHovered ? `${cls.searchBox} ${cls.active}`: `${cls.searchBox}`}>
-                            <input className={cls.searchInput} type="text" name="" placeholder="Поиск"/>
-                            <button className={`${cls.menu_btn} ${cls.searchButton}`}
-                                    onClick={() => setIsHovered(!isHovered)}>
-                                {/*{isHovered ? (*/}
-                                {/*    <IoSearch />*/}
-                                {/*) : (*/}
-                                {/*    <>*/}
-                                        <IoSearch />
-                                        <span>Поиск</span>
-                                {/*    </>*/}
-                                {/*)}*/}
+        <>
+            <header className={cls.header}>
+                <div className="container"  ref={menuRef}>
+                    <nav className={cls.nav}>
+                        <div className={cls.logoBox}>
+                            <a href="/">
+                                <img src={logo} alt="logotype"/>
+                            </a>
+                        </div>
+                        <div className={cls.menu}>
+                            <div className={isHovered ? `${cls.searchBox} ${cls.active}`: `${cls.searchBox}`}>
+                                <input className={cls.searchInput} type="text" name="" placeholder="Поиск"/>
+                                <button className={`${cls.menu_btn} ${cls.searchButton}`}
+                                        onClick={() => setIsHovered(!isHovered)}>
+                                    <IoSearch />
+                                    <span>Поиск</span>
+                                </button>
+                            </div>
+                            <div className={cls.menu_btn}>
+                                <a href="#">
+                                    Помощь
+                                </a>
+                            </div>
+                            <div className={cls.menu_btn} onClick={()=>{setOpen(!open)}}>
+                                <a href="#">
+                                    Корзина
+                                </a>
+                            </div>
 
+                        </div>
+                        <div className={cls.searchBox}>
+                            <input className={cls.searchInput} type="text" name="" placeholder="Поиск"/>
+                            <button className={`${cls.menu_btnw} ${cls.searchButton}`}
+                                >
+                                <IoSearch />
+                                <span>Поиск</span>
                             </button>
                         </div>
-                        <div className={cls.menu_btn}>
-                            <a href="#">
-                                Помощь
-                            </a>
-                        </div>
-                        <div className={`${cls.menu_btn} ${cls.trigger}`} onClick={()=>{setOpen(!open)}}>
-                            <a href="#">
-                                Корзина
-                            </a>
-                        </div>
-                        <HeaderModal modal={open}/>
-                    </div>
-                </nav>
-            </div>
-        </header>
+                    </nav>
+                    <HeaderModal modal={open} setOpen={setOpen}/>
+                </div>
+            </header>
+        </>
     );
 };
 

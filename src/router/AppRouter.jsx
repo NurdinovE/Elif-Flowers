@@ -1,5 +1,7 @@
 import { Route, Routes as Switch } from "react-router-dom";
 import Home from "../pages/home/Home.jsx";
+import ProductPage from "../pages/product-page/ProductPage.jsx";
+import Error from "../pages/error/Error.jsx";
 
 
 const pagesData = [
@@ -7,6 +9,15 @@ const pagesData = [
         path: "",
         title: "home",
         element: <Home/>
+    },{
+        path: "/product/:name",
+        title: "product-page",
+        element: <ProductPage/>
+    },
+    {
+        path: "*",
+        element: <Error/>,
+        title: "error"
     },
 ];
 
