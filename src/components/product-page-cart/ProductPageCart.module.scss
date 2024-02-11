@@ -37,12 +37,20 @@
 
     }
     &_price{
-      margin-top: 30px;
+      margin-top: 20px;
+      color: #1E280F;
+      font-size: 18.873px;
+      font-weight: 600;
+      letter-spacing: 0.25px;
+    }
+    &_region{
+      margin-top: 20px;
       color: #1E280F;
       font-size: 18.873px;
       font-weight: 500;
       letter-spacing: 0.25px;
     }
+
     &_button{
       display: flex;
       align-items: center;

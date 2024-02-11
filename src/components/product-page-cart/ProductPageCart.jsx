@@ -1,22 +1,40 @@
 import React from 'react';
 import { FaArrowRightLong } from "react-icons/fa6";
+import {kyrgyzstanRegions} from "../product/Product.jsx"
 import cls from "./ProductPageCart.module.scss"
-import flower from "../../assets/image/product.png"
-
 const ProductPageCart = ({product}) => {
+    function addToCart (productId) {
+        if (typeof localStorage !== 'undefined') {
+            const existingProductIds = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (!existingProductIds.includes(productId)) {
+                existingProductIds.push(productId);
+                localStorage.setItem('cart', JSON.stringify(existingProductIds));
+                console.log(`Product ID ${productId} has been saved to localStorage.`);
+            } else {
+                console.log(`Product ID ${productId} is already in localStorage.`);
+            }
+        } else {
+            console.error('LocalStorage is not supported in this browser.');
+        }
+    }
     return (
         <div className={cls.product}>
             <div className={cls.product_image}>
-                <img src={flower} alt={product.title}/>
+                <img src={product.image} alt={product.title}/>
             </div>
             <div className={cls.product_info}>
                 <div className={cls.product_info_name}>
                     {product.title}
                 </div>
                 <div className={cls.product_info_price}>
-                    {product.price}
+                    {product.price} cом
                 </div>
-                <button className={cls.product_info_button}>
+                <div className={cls.product_info_region}>
+                    {kyrgyzstanRegions.find(item => item.request === product.region)?.name}
+                </div>
+
+                <button className={cls.product_info_button} onClick={() => addToCart(product.product_id)}>
                     <span>
                         добавить в корзину
                     </span>
@@ -25,7 +43,7 @@ const ProductPageCart = ({product}) => {
             </div>
             <div className={cls.product_descr}>
                 <p>{product.title}</p> <br/>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad, corporis cum cumque delectus eligendi ex explicabo, fugiat impedit iste itaque magnam minima, natus neque nesciunt officiis omnis perferendis quaerat quo tenetur! Aliquid, est incidunt? A cum dolore eos error odit reiciendis repudiandae! Animi, nisi, possimus. A aliquid asperiores autem commodi, est eum hic, ipsa, modi nisi possimus quia voluptas.
+                {product.description}
             </div>
         </div>
     );

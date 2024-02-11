@@ -6,7 +6,7 @@ import Error from "../pages/error/Error.jsx";
 
 const pagesData = [
     {
-        path: "",
+        path: "/",
         title: "home",
         element: <Home/>
     },{

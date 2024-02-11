@@ -1,60 +1,83 @@
-import React, {useEffect, useRef, useState} from 'react';
-
-
-import cls from "./Product.module.scss"
-
-import arrow from "../../assets/icons/Vectorarrow.png"
+import React, {useEffect, useState} from 'react';
 import ProductCard from "../product-card/ProductCard.jsx";
+import {useSearchParams} from "react-router-dom";
+import cls from "./Product.module.scss"
+import arrow from "../../assets/icons/Vectorarrow.png"
 
+// eslint-disable-next-line react-refresh/only-export-components
+export const kyrgyzstanRegions = [
+    { id: 1, name: "Бишкек", request: "bihskek" },
+    { id: 2, name: "Чуй", request: "chui" },
+    { id: 3, name: "Ош", request: "osh" },
+    { id: 4, name: "Джалал-Абад", request: "jalal-abad" },
+    { id: 5, name: "Баткен", request: "batken" },
+    { id: 6, name: "Нарын", request: "naryn" },
+    { id: 7, name: "Иссык-Куль", request: "issyk-kul" },
+    { id: 8, name: "Талас", request: "talas" },
+]
 const Product = () => {
-    const priceRanges = [
-        {id: 1, name: "До 500 сом"},
-        {id: 2, name: "500 - 1000 сом"},
-        {id: 3, name: "1000 - 2000 сом"},
-        {id: 4, name: "2000 - 5000 сом"},
-        {id: 5, name: "Более 5000 сом"},
-        // Add more price ranges as needed
-    ];
-    const kyrgyzstanRegions = [
-        {id: 1, name: "Бишкек"},
-        {id: 2, name: "Чуй"},
-        {id: 3, name: "Ош"},
-        {id: 4, name: "Джалал-Абад"},
-        {id: 5, name: "Баткен"},
-        {id: 6, name: "Нарын"},
-        {id: 7, name: "Иссык-Куль"},
-        {id: 8, name: "Талас"},
-        {id: 9, name: "Ош"},
-        // Add more regions as needed
-    ];
-    const data = [
-        {
-            "id": 1,
-            "title": "Birthday Brights Bouquet",
-            "price": "$65 - $95"
-        },
-        {
-            "id": 2,
-            "title": "Marmalade Skies Bouquet",
-            "price": "$50 - $75"
-        },
-        {
-            "id": 3,
-            "title": "Fiesta Bouquet",
-            "price": "$60 - $128"
-        },
-        {
-            "id": 4,
-            "title": "Light of My Life Bouquet & Happy Birthday Topper",
-            "price": "$55 - $85"
-        }
-    ]
+    const API_BASE_URL = 'http://159.89.29.185/api_product/v1/product/';
 
-    // const [data, setData] = useState([])
+    const priceRanges = [
+        { id: 1, name: "До 500 сом" },
+        { id: 2, name: "500 - 1000 сом" },
+        { id: 3, name: "1000 - 2000 сом" },
+        { id: 4, name: "2000 - 5000 сом" },
+        { id: 5, name: "Более 5000 сом" },
+    ];
+
+
+    const [data, setData] = useState([])
     const [region, setRegion] = useState(false);
     const [price, setPrice] = useState(false)
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedItem2, setSelectedItem2] = useState(null);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const fetchData = async (region) => {
+        try {
+            let response;
+
+            if (region !== 0) {
+                response = await fetch(`${API_BASE_URL}?region=${region}`);
+            } else {
+                response = await fetch(API_BASE_URL);
+            }
+            const data = await response.json();
+            setData(data);
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    const handleItemClick2 = (id, region) => {
+        let filterId = id;
+        setSelectedItem2(selectedItem2 === filterId ? null : filterId);
+        setSearchParams({ region })
+
+        if(selectedItem2 === filterId){
+            fetchData(0)
+        } else{
+            fetchData(region);
+        }
+    };
+
+    useEffect(() => {
+        const fetchDataWrapper = async () => {
+            try {
+                const response = await fetch(API_BASE_URL);
+                const data = await response.json();
+                setData(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchDataWrapper();
+    }, []);
+
+
     const toggleDropdown = () => {
         setRegion(!region)
         setPrice(false)
@@ -67,24 +90,13 @@ const Product = () => {
     const handleItemClick = (id) => {
         let filterId = Number(id)
         selectedItem === filterId ? setSelectedItem(null) : setSelectedItem(filterId);
-    }
-    const handleItemClick2 = (id) => {
-        let filterId = Number(id)
-        selectedItem2 === filterId ? setSelectedItem2(null) : setSelectedItem2(filterId);
-    }
+        if(selectedItem !== filterId){
+            let filteredData = data.filter((item => !(item.price > 500)))
+            setData(filteredData)
+        } else {
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const data = await fetch('http://159.89.29.185/api_product/v1/product/');
-    //             const json = await data;
-    //             setData(json);
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     };
-    //     fetchData()
-    // }, [])
+        }
+    }
 
     return (
         <section id={cls.Products}>
@@ -108,7 +120,7 @@ const Product = () => {
                             </div>
                             <div className={`${cls.dropdown_body} ${region && cls.open}`}>
                                 {priceRanges.map(item => (
-                                    <div className={cls.dropdown_item} onClick={e => handleItemClick(e.target?.id)}
+                                    <div className={cls.dropdown_item} onClick={e => handleItemClick(item.id)}
                                          id={item.id}
                                          key={item.id}
                                     >
@@ -128,12 +140,10 @@ const Product = () => {
                             </div>
                             <div className={`${cls.dropdown_body} ${price && cls.open}`}>
                                 {kyrgyzstanRegions.map(item => (
-                                    <div className={cls.dropdown_item} onClick={e => handleItemClick2(e.target?.id)}
-                                         id={item.id}
-                                         key={item.id}
+                                    <div className={cls.dropdown_item} onClick={() => handleItemClick2(item.id, item.request) } key={item.id}
+                                         id={item.request}
                                     >
-                                    <span
-                                        className={`${cls.dropdown_item_dot} ${item.id === selectedItem2 && cls.selected}`}>• </span>
+                                        <span className={`${cls.dropdown_item_dot} ${item.id === selectedItem2 && cls.selected}`}>• </span>
                                         {item.name}
                                     </div>
                                 ))}
@@ -142,8 +152,8 @@ const Product = () => {
                     </div>
                 </div>
                 <div className={cls.products}>
-                    {data.map((item) => (
-                        <ProductCard product={item} key={item.id}/>
+                    {data?.map((item, index) => (
+                        <ProductCard product={item} key={item.id || index}/>
                     ))}
                 </div>
             </div>

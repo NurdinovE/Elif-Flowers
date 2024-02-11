@@ -60,7 +60,7 @@ const Header = () => {
 
                         </div>
                         <div className={cls.searchBox}>
-                            <input className={cls.searchInput} type="text" name="" placeholder="Поиск"/>
+                            <input className={cls.searchInput} type="text" name="" placeholder=""/>
                             <button className={`${cls.menu_btnw} ${cls.searchButton}`}
                                 >
                                 <IoSearch />

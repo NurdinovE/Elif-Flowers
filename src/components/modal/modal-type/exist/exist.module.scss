@@ -22,7 +22,6 @@
     &:first-child {
       width: 44%;
     }
-
     &:last-child {
       width: 18%;
     }
@@ -46,11 +45,71 @@
         height: 70px;
       }
     }
+    .col{
+      padding-left: 15px;
+      &:first-child{
+        padding-left: 0;
+      }
+      &:nth-child(3){
+        padding-left: 0;
+      }
+    }
 
     .row {
       padding: 12px 0;
       text-align: left;
       display: flex;
+      align-items: center;
+    }
+    $border: 0 solid #dbdbdb;
+    $border-radius: 3px;
+    $color--primary: #f3f3f3;
+    $modifier--text-color: #888;
+
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      border-radius: $border-radius;
+
+      &:focus {
+        background: red;
+      }
+    }
+
+    .quantity__modifier,
+    .quantity__screen {
+      user-select: none;
+      outline: none;
+    }
+
+    .quantity__modifier {
+      width: 30px;
+      color: $modifier--text-color;
+
+      border: $border;
+      text-align: center;
+      text-shadow: 0 1px 0 rgba(#fff, .6);
+      cursor: pointer;
+      &:hover {
+        background: darken($color--primary, 10%);
+        color: darken($modifier--text-color, 20%)
+      }
+
+      &__left {
+        border-radius: $border-radius 0 0 $border-radius;
+      }
+
+      &__right {
+        border-radius: 0 $border-radius $border-radius 0;
+      }
+    }
+
+    .quantity__screen {
+      width: 35px;
+      text-align: center;
+      border-radius: $border-radius;
+
     }
 
   }
@@ -69,9 +128,31 @@
       &:nth-child(1){
 
       }
+      input{
+        border: none;
+        outline: none;
+        padding: 0 0 0 10px ;
+        border-radius: 5px;
+        background: rgba(255, 253, 248, 0.76);
+      }
     }
 
     font-weight: bold;
+    .modal_btn {
+      display: block;
+      border-radius: 11px;
+      border: 1px solid #FFF;
+      background: #3C4619;
+      padding: 10px 50px;
+      margin: 0 auto;
+      color: #FFF;
+      text-align: center;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 0.15px;
+      text-transform: uppercase;
+    }
   }
 }
 

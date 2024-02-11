@@ -1,9 +1,9 @@
 import React from 'react';
 import cls from "./Button.module.scss"
 
-const Button = ({text}) => {
+const Button = ({text, setOpen, modal}) => {
     return (
-        <button className={cls.modal_btn}>
+        <button className={cls.modal_btn} onClick={() => setOpen(!modal)}>
             {text}
         </button>
     );
