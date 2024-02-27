@@ -5,10 +5,15 @@ const ExistProduct = ({item, quantity, setQuantity}) => {
     const increment = () => {
         setQuantity(quantity + 1);
     };
+    const existingProductIds = JSON.parse(localStorage.getItem('cart')) || [];
 
-    const decrement = () => {
+    const decrement = (id) => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
+        }else{
+            setQuantity(0)
+            let updatedCart = existingProductIds.slice(existingProductIds.findIndex(item => item.id === id), existingProductIds.length)
+            localStorage.setItem('cart', [updatedCart])
         }
     };
     return (
@@ -21,7 +26,7 @@ const ExistProduct = ({item, quantity, setQuantity}) => {
             <div className={cls.col}>{item.price} c</div>
             <div className={cls.col}>
                 <div className={cls.quantity}>
-                    <button className={`${cls.quantity__modifier} ${cls.quantity__modifier__left}`} onClick={decrement}>
+                    <button className={`${cls.quantity__modifier} ${cls.quantity__modifier__left}`} onClick={() => decrement(item.id)}>
                         &#8722;
                     </button>
                     <input className={cls.quantity__screen} type="text" value={quantity} readOnly />

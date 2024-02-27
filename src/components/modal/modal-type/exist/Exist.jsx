@@ -7,6 +7,7 @@ const Exist = ({product}) => {
     const [items, setItems] = useState([])
     const [total, setTotal] = useState(0)
     const [quantities, setQuantities] = useState([]);
+    console.log(quantities)
     // eslint-disable-next-line react-hooks/exhaustive-deps
 
     const updateTotal = () => {
@@ -34,9 +35,9 @@ const Exist = ({product}) => {
 
             const response = await fetch('http://159.89.29.185/api_order/v1/order/', headers);
             return await response.json()
-        } catch (error) {
-            console.error('Error creating order:', error);
-            throw error; // Rethrow the error to handle it at a higher level
+        } catch (err) {
+            console.error('Error creating order:', err);
+            throw err; // Rethrow the error to handle it at a higher level
         }
     };
 
@@ -93,11 +94,6 @@ const Exist = ({product}) => {
         }
     };
 
-// Usage:
-// Call placeOrder with your cart data and phone number
-// placeOrder(cartData, 'yourPhoneNumber');
-
-
     return (
         <div className={cls.exist}>
             <div className={cls.exist_head}>
@@ -141,10 +137,10 @@ const Exist = ({product}) => {
                                setValue(e.target.value)
                            }}
                     />
+
                     <button onClick={() => placeOrder(product, value)} className={cls.modal_btn}>
                         Оформить заказ
                     </button>
-
                 </div>
             </div>
 

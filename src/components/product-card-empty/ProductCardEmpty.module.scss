@@ -1,0 +1,15 @@
+.msc_blank  {
+  text-align: center;
+  grid-area: empty;
+  &_icon {
+    color: gray;
+    font-size: 4rem;
+  }
+  &_title {
+    font-size: 1.6rem;
+  }
+  &_desc {
+    font-size: 1rem;
+    color: gray;
+  }
+}
