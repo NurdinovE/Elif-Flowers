@@ -11,7 +11,7 @@ const ProductPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}/${storedProduct}`
+                const response = await fetch(`${API_BASE_URL}${storedProduct}`
                 );
                 const data = await response.json();
                 setItems(data)
