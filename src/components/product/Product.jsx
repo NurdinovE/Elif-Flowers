@@ -24,8 +24,8 @@ const priceRanges = [
     { id: 5, name: "Более 5000 сом" },
 ];
 
-// const API_BASE_URL = 'http://159.89.29.185/api_product/v1/product/';
-export const API_BASE_URL = 'https://api.escuelajs.co/api/v1/products';
+export const API_BASE_URL = 'http://159.89.29.185/api_product/v1/product/';
+// export const API_BASE_URL = 'https://api.escuelajs.co/api/v1/products';
 
 const fakeData = [
     {
